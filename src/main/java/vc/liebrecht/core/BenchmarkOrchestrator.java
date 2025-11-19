@@ -47,18 +47,19 @@ public class BenchmarkOrchestrator {
         Benchmark bm = new Benchmark(config);
 
         for (int i = 0; i < config.getRuns(); i++) {
+            boolean isDryRun = i == 0;
             // We need numProducers + 1 threads to cover the consumer
             ExecutorService pool = Executors.newFixedThreadPool(config.getProducers() + 1);
             long poolDuration = bm.run(pool);
             pool.shutdown();
             pool.awaitTermination(2, TimeUnit.MINUTES);
-            statisticsPool.addDuration(poolDuration);
+            if (!isDryRun) statisticsPool.addDuration(poolDuration);
 
             ExecutorService virtual = Executors.newVirtualThreadPerTaskExecutor();
             long virtualDuration = bm.run(virtual);
             virtual.shutdown();
             virtual.awaitTermination(2, TimeUnit.MINUTES);
-            statisticsVirtual.addDuration(virtualDuration);
+            if (!isDryRun) statisticsVirtual.addDuration(virtualDuration);
             System.out.printf("\n=== %d. Run completed ===", i + 1);
         }
 
