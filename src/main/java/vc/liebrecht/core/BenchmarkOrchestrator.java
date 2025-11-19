@@ -8,13 +8,36 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * Orchestrates the execution of benchmarks for different executor types.
+ * <p>
+ * This class runs benchmarks for both {@code ExecutorType.ThreadPool} and
+ * {@code ExecutorType.VirtualThreads} and collects the results in
+ * {@code BenchmarkStatistics} objects. The results are printed after all runs
+ * are completed.
+ */
 public class BenchmarkOrchestrator {
     private final Map<ExecutorType, BenchmarkStatistics> _results;
 
+    /**
+     * Constructs a new benchmark orchestrator.
+     * <p>
+     * Initializes an empty map for storing benchmark results.
+     */
     public BenchmarkOrchestrator() {
         _results = new HashMap<>();
     }
 
+    /**
+     * Runs benchmarks for both executor types.
+     * <p>
+     * Executes the configured number of runs, where each run is performed with both
+     * a thread pool and virtual threads. Results are collected in {@code BenchmarkStatistics}
+     * objects and printed at the end.
+     *
+     * @param config The benchmark configuration with all necessary parameters
+     * @throws InterruptedException If a thread is interrupted during execution
+     */
     public void runBenchmarks(BenchmarkConfig config) throws InterruptedException {
         BenchmarkStatistics statisticsPool = new BenchmarkStatistics(ExecutorType.ThreadPool);
         BenchmarkStatistics statisticsVirtual = new BenchmarkStatistics(ExecutorType.VirtualThreads);
@@ -48,6 +71,14 @@ public class BenchmarkOrchestrator {
         System.out.println(statisticsVirtual);
     }
 
+    /**
+     * Returns the collected benchmark results.
+     * <p>
+     * The map contains the corresponding {@code BenchmarkStatistics} for each
+     * {@code ExecutorType} with all measured values.
+     *
+     * @return A map with benchmark results for each executor type
+     */
     public Map<ExecutorType, BenchmarkStatistics> getResults() {
         return _results;
     }
