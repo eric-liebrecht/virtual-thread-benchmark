@@ -21,11 +21,11 @@ public class BenchmarkStatistics {
     }
 
     public long minDurationMs() {
-        return (long) (_durationsNano.stream().min(Long::compareTo).get() / 1_000_000.0);
+        return (long) (_durationsNano.stream().min(Long::compareTo).orElse(0L) / 1_000_000.0);
     }
 
     public long maxDurationMs() {
-        return (long) (_durationsNano.stream().max(Long::compareTo).get() / 1_000_000.0);
+        return (long) (_durationsNano.stream().max(Long::compareTo).orElse(0L) / 1_000_000.0);
     }
 
     public double averageDurationMs() {

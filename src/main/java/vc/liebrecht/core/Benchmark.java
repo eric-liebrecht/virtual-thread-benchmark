@@ -15,7 +15,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * Creates a Benchmark for a specific {@code ExecutorService}.
  */
 public class Benchmark {
-    private BenchmarkConfig _config;
+    private final BenchmarkConfig _config;
 
     public Benchmark(BenchmarkConfig config) {
         _config = config;

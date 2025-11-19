@@ -42,11 +42,9 @@ public class BenchmarkOrchestrator {
         _results.put(ExecutorType.ThreadPool, statisticsPool);
         _results.put(ExecutorType.VirtualThreads, statisticsVirtual);
 
-        System.out.println("=== Benchmark erfolgreich abgeschlossen ===");
-        System.out.println("");
+        System.out.println("=== Benchmark erfolgreich abgeschlossen ===\n");
         System.out.println(statisticsPool);
-        System.out.println("-------------------------------------------");
-        System.out.println("");
+        System.out.println("-------------------------------------------\n");
         System.out.println(statisticsVirtual);
     }
 

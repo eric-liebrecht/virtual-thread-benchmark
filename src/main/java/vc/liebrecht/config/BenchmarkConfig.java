@@ -1,10 +1,10 @@
 package vc.liebrecht.config;
 
 public class BenchmarkConfig {
-    private int _numProducers;
-    private int _numMessagesPerProducer;
-    private int _payloadSize;
-    private int _numRuns;
+    private final int _numProducers;
+    private final int _numMessagesPerProducer;
+    private final int _payloadSize;
+    private final int _numRuns;
 
     public BenchmarkConfig(int numProducers, int numMessagesPerProducer, int payloadSize, int numRuns) {
         _numProducers = numProducers;
