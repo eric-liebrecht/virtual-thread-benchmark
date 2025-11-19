@@ -1,0 +1,2 @@
+ExecutorType,NumProducers,MessagesPerProducer,PayloadSize,RunCount,TotalTimeMs,AvgDurationMs,MinDurationMs,MaxDurationMs,ThroughputOpsPerSec
+VirtualThreads,1000,10000,1024,10,4385,084,438,508,387,540,2,28ThreadPool,1000,10000,1024,10,3225,296,322,530,297,407,3,10
