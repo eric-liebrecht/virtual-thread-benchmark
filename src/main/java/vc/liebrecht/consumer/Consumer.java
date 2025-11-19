@@ -41,8 +41,6 @@ public class Consumer implements Runnable {
      * received. The received counter is incremented for each message. When all messages
      * are received or the thread is interrupted, the done latch is counted down.
      * If the thread is interrupted, the interrupt flag is set.
-     *
-     * @throws InterruptedException If the thread is interrupted while waiting to retrieve a message
      */
     @Override
     public void run() {

@@ -34,8 +34,6 @@ public class Producer implements Runnable {
      * <p>
      * Creates the specified number of messages and inserts them into the queue.
      * If the thread is interrupted, the interrupt flag is set and the method returns.
-     *
-     * @throws InterruptedException If the thread is interrupted while waiting to insert a message
      */
     @Override
     public void run() {
