@@ -100,12 +100,12 @@ public class BenchmarkStatistics {
     public String toString() {
         return """
         --- Benchmark Statistics: %s ---
-        Total operations:      %d
-        Total time:            %.3f ms
-        Throughput:            %.2f ops/sec
-        Avg duration:          %.2f ms
-        Min duration:          %d ms
-        Max duration:          %d ms
+        Total operations:\t%d
+        Total time:     \t%.3f ms
+        Throughput:     \t%.2f ops/sec
+        Avg duration:   \t%.2f ms
+        Min duration:   \t%d ms
+        Max duration:   \t%d ms
         """.formatted(
                 _executorType,
                 this.getCount(),

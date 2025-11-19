@@ -42,7 +42,7 @@ public class BenchmarkOrchestrator {
         BenchmarkStatistics statisticsPool = new BenchmarkStatistics(ExecutorType.ThreadPool);
         BenchmarkStatistics statisticsVirtual = new BenchmarkStatistics(ExecutorType.VirtualThreads);
 
-        System.out.println("=== Benchmark gestartet ===");
+        System.out.println("=== Benchmark started ===");
 
         Benchmark bm = new Benchmark(config);
 
@@ -59,13 +59,16 @@ public class BenchmarkOrchestrator {
             virtual.shutdown();
             virtual.awaitTermination(2, TimeUnit.MINUTES);
             statisticsVirtual.addDuration(virtualDuration);
-            System.out.printf("\n=== %d. Durchlauf abgeschlossen ===", i + 1);
+            System.out.printf("\n=== %d. Run completed ===", i + 1);
         }
 
         _results.put(ExecutorType.ThreadPool, statisticsPool);
         _results.put(ExecutorType.VirtualThreads, statisticsVirtual);
 
-        System.out.println("=== Benchmark erfolgreich abgeschlossen ===\n");
+        System.out.println("\n\n=== Benchmark completed successfully ===\n");
+
+        System.out.println(config);
+        System.out.println("-------------------------------------------\n");
         System.out.println(statisticsPool);
         System.out.println("-------------------------------------------\n");
         System.out.println(statisticsVirtual);

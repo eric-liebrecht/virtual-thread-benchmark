@@ -109,4 +109,20 @@ public class BenchmarkConfig {
     public int getRuns() {
         return _numRuns;
     }
+
+    @Override
+    public String toString() {
+        return """
+        --- Benchmark Config: ---
+        Number of producers: \t%d
+        Messages per producer:\t%d
+        Payload size:        \t%d byte
+        Runs:                \t%d
+        """.formatted(
+                this.getProducers(),
+                this.getMessagesPerProducer(),
+                this.getPayloadSize(),
+                this.getRuns()
+        );
+    }
 }
