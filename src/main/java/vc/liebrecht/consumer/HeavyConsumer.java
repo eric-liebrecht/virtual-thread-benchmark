@@ -63,7 +63,9 @@ public class HeavyConsumer implements Runnable {
             while (_received.get() < _totalMessages) {
                 Message m = _queue.take();
                 digest.update(m.payload());
-                digest.digest(); _received.incrementAndGet(); }
+                digest.digest();
+                _received.incrementAndGet();
+            }
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         } catch (NoSuchAlgorithmException e) {
