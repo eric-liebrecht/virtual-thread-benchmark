@@ -27,10 +27,44 @@ public class Main {
         try {
             BenchmarkOrchestrator orchestrator = new BenchmarkOrchestrator();
             List<BenchmarkConfig> configs = List.of(
+                    // 1) Small scale – LIGHTWEIGHT
+                    new BenchmarkConfig(10, 2, ConsumerType.LIGHTWEIGHT, 500, 16, 21),
+
+                    // 2) Small scale – HEAVY
                     new BenchmarkConfig(10, 1, ConsumerType.HEAVY, 500, 16, 21),
+
+                    // 3) Mid scale – LIGHTWEIGHT
+                    new BenchmarkConfig(500, 1, ConsumerType.LIGHTWEIGHT, 100, 16, 21),
+
+                    // 4) Mid scale – HEAVY
                     new BenchmarkConfig(500, 1, ConsumerType.HEAVY, 100, 16, 21),
-                    new BenchmarkConfig(5_000, 1, ConsumerType.HEAVY, 50, 16, 21)
+
+                    // 5) Large scale – LIGHTWEIGHT
+                    new BenchmarkConfig(5_000, 1, ConsumerType.LIGHTWEIGHT, 50, 16, 21),
+
+                    // 6) Large scale – HEAVY
+                    new BenchmarkConfig(5_000, 1, ConsumerType.HEAVY, 50, 16, 21),
+
+                    // 7) Multicore heavy workload: 8 consumers
+                    new BenchmarkConfig(100, 8, ConsumerType.HEAVY, 200, 16, 21),
+
+                    // 8) Higher load, 8 consumers – HEAVY
+                    new BenchmarkConfig(500, 8, ConsumerType.HEAVY, 100, 16, 21),
+
+                    // 9) I/O simulation – LIGHTWEIGHT + Sleep (2ms)
+                    // (Sleep machst du im Consumer selbst)
+                    new BenchmarkConfig(500, 1, ConsumerType.LIGHTWEIGHT, 200, 16, 21),
+
+                    // 10) Extreme I/O simulation – LIGHTWEIGHT + Sleep (2ms)
+                    new BenchmarkConfig(5_000, 1, ConsumerType.LIGHTWEIGHT, 100, 16, 21),
+
+                    // 11) Large payload – HEAVY
+                    new BenchmarkConfig(100, 1, ConsumerType.HEAVY, 100, 1_000_000, 21),
+
+                    // 12) Large payload parallel – HEAVY + 8 consumers
+                    new BenchmarkConfig(500, 8, ConsumerType.HEAVY, 100, 1_000_000, 21)
             );
+
 
             for (BenchmarkConfig config : configs) {
                 orchestrator.runBenchmarks(config);
