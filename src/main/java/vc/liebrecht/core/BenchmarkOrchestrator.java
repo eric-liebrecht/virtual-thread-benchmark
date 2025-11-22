@@ -2,7 +2,9 @@ package vc.liebrecht.core;
 
 import vc.liebrecht.config.BenchmarkConfig;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -17,7 +19,7 @@ import java.util.concurrent.TimeUnit;
  * are completed.
  */
 public class BenchmarkOrchestrator {
-    private final Map<ExecutorType, BenchmarkStatistics> _results;
+    private final List<BenchmarkResult> _results;
 
     /**
      * Constructs a new benchmark orchestrator.
@@ -25,7 +27,7 @@ public class BenchmarkOrchestrator {
      * Initializes an empty map for storing benchmark results.
      */
     public BenchmarkOrchestrator() {
-        _results = new HashMap<>();
+        _results = new ArrayList<>();
     }
 
     /**
@@ -62,11 +64,10 @@ public class BenchmarkOrchestrator {
             virtual.shutdown();
             virtual.awaitTermination(2, TimeUnit.MINUTES);
             if (!isDryRun) statisticsVirtual.addDuration(virtualDuration);
-            System.out.printf("\n=== %d. Run completed ===", i + 1);
+            System.out.format("=== %d. run completed ===\n", i + 1);
         }
 
-        _results.put(ExecutorType.ThreadPool, statisticsPool);
-        _results.put(ExecutorType.VirtualThreads, statisticsVirtual);
+        _results.add(new BenchmarkResult(config, statisticsPool, statisticsVirtual));
 
         System.out.println("\n\n=== Benchmark completed successfully ===\n");
 
@@ -85,7 +86,7 @@ public class BenchmarkOrchestrator {
      *
      * @return A map with benchmark results for each executor type
      */
-    public Map<ExecutorType, BenchmarkStatistics> getResults() {
+    public List<BenchmarkResult> getResults() {
         return _results;
     }
 }

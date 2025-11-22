@@ -107,15 +107,15 @@ public class BenchmarkStatistics {
 	@Override
 	public String toString() {
 		return """
-				--- Benchmark Statistics: %s ---
-				Total operations:\t%d
-				Total time:     \t%.3f ms
-				Throughput:     \t%.2f ops/sec
-				Avg duration:   \t%.2f ms
-				Min duration:   \t%d ms
-				Max duration:   \t%d ms
+				\t{
+					\tTotal operations:\t%d
+					\tTotal time:     \t%.3f ms
+					\tThroughput:     \t%.2f ops/sec
+					\tAvg duration:   \t%.2f ms
+					\tMin duration:   \t%d ms
+					\tMax duration:   \t%d ms
+				\t}
 				""".formatted(
-				_executorType,
 				this.getCount(),
 				this.totalDuration() / 1_000_000.0,
 				this.throughput(),
