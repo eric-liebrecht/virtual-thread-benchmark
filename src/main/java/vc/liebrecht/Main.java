@@ -6,8 +6,8 @@ import java.util.List;
 
 import vc.liebrecht.config.BenchmarkConfig;
 import vc.liebrecht.consumer.ConsumerType;
-import vc.liebrecht.core.BenchmarkOrchestrator;
-import vc.liebrecht.core.BenchmarkResult;
+import vc.liebrecht.engine.BenchmarkOrchestrator;
+import vc.liebrecht.engine.BenchmarkResult;
 
 /**
  * Main class for the Producer-Consumer-Benchmark.

@@ -1,6 +1,6 @@
 package vc.liebrecht.producer;
 
-import vc.liebrecht.core.Message;
+import vc.liebrecht.domain.Message;
 
 import java.util.concurrent.BlockingQueue;
 

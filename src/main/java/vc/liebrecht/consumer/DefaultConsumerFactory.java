@@ -3,7 +3,7 @@ package vc.liebrecht.consumer;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.CountDownLatch;
 
-import vc.liebrecht.core.Message;
+import vc.liebrecht.domain.Message;
 
 /**
  * Default implementation of {@code ConsumerFactory} that creates consumers

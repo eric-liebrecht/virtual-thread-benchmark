@@ -1,4 +1,4 @@
-package vc.liebrecht.core;
+package vc.liebrecht.domain;
 
 /**
  * Represents a message with a byte-array as payload.

@@ -1,4 +1,6 @@
-package vc.liebrecht.core;
+package vc.liebrecht.engine;
+
+import vc.liebrecht.domain.ExecutorType;
 
 import java.util.ArrayList;
 import java.util.List;

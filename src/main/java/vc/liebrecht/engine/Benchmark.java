@@ -1,4 +1,4 @@
-package vc.liebrecht.core;
+package vc.liebrecht.engine;
 
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
@@ -9,6 +9,7 @@ import java.util.concurrent.TimeUnit;
 import vc.liebrecht.config.BenchmarkConfig;
 import vc.liebrecht.consumer.ConsumerFactory;
 import vc.liebrecht.consumer.DefaultConsumerFactory;
+import vc.liebrecht.domain.Message;
 import vc.liebrecht.producer.Producer;
 
 /**

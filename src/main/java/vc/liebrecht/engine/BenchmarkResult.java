@@ -1,4 +1,4 @@
-package vc.liebrecht.core;
+package vc.liebrecht.engine;
 
 import vc.liebrecht.config.BenchmarkConfig;
 

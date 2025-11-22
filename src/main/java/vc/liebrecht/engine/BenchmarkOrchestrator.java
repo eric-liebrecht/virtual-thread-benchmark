@@ -1,11 +1,10 @@
-package vc.liebrecht.core;
+package vc.liebrecht.engine;
 
 import vc.liebrecht.config.BenchmarkConfig;
+import vc.liebrecht.domain.ExecutorType;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;

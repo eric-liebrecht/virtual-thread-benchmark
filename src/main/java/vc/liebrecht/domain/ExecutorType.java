@@ -1,4 +1,4 @@
-package vc.liebrecht.core;
+package vc.liebrecht.domain;
 
 /**
  * Enumeration for different executor types used in the benchmark.

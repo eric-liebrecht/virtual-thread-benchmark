@@ -6,7 +6,7 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
-import vc.liebrecht.core.Message;
+import vc.liebrecht.domain.Message;
 
 /**
  * A heavy consumer that takes messages from a {@code BlockingQueue} and
