@@ -2,7 +2,7 @@ package vc.liebrecht.consumer;
 
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.TimeUnit;
 
 import vc.liebrecht.core.Message;
 
@@ -18,25 +18,17 @@ import vc.liebrecht.core.Message;
  */
 public class LightweightConsumer implements Runnable {
 	private final BlockingQueue<Message> _queue;
-	private final int _totalMessages;
 	private final CountDownLatch _done;
-	private final AtomicInteger _received;
 
 	/**
 	 * Constructs a new consumer.
 	 *
-	 * @param q             The queue to retrieve messages from
-	 * @param totalMessages The total number of messages to receive
-	 * @param done          The latch to signal when all messages have been received
-	 * @param received      The atomic counter to track the number of received
-	 *                      messages
+	 * @param q    The queue to retrieve messages from
+	 * @param done The latch to signal when all messages have been received
 	 */
-	public LightweightConsumer(BlockingQueue<Message> q, int totalMessages, CountDownLatch done,
-			AtomicInteger received) {
+	public LightweightConsumer(BlockingQueue<Message> q, CountDownLatch done) {
 		_queue = q;
-		_totalMessages = totalMessages;
 		_done = done;
-		_received = received;
 	}
 
 	/**
@@ -48,7 +40,7 @@ public class LightweightConsumer implements Runnable {
 	 * queue
 	 * and discarded. The loop runs until the expected total number of messages has
 	 * been
-	 * received, as tracked by the shared atomic counter.
+	 * received, as tracked by the {@code CountDownLatch}.
 	 *
 	 * <p>
 	 * If the thread is interrupted while waiting on the queue, the interrupt flag
@@ -63,14 +55,20 @@ public class LightweightConsumer implements Runnable {
 	@Override
 	public void run() {
 		try {
-			while (_received.get() < _totalMessages) {
-				_queue.take();
-				_received.incrementAndGet();
+			while (true) {
+				Message m = _queue.poll(10, TimeUnit.NANOSECONDS);
+
+				if (m == null) {
+					if (_done.getCount() == 0) {
+						break;
+					}
+					continue;
+				}
+
+				_done.countDown();
 			}
 		} catch (InterruptedException e) {
-			Thread.currentThread().interrupt();
-		} finally {
-			_done.countDown();
+			throw new RuntimeException(e);
 		}
 	}
 }

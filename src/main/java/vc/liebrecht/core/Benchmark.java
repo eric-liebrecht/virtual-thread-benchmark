@@ -5,7 +5,6 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.atomic.AtomicInteger;
 
 import vc.liebrecht.config.BenchmarkConfig;
 import vc.liebrecht.consumer.ConsumerFactory;
@@ -70,15 +69,12 @@ public class Benchmark {
 	public long run(ExecutorService executor) throws InterruptedException {
 		int totalMessages = _config.getProducers() * _config.getMessagesPerProducer();
 		BlockingQueue<Message> queue = new ArrayBlockingQueue<>(totalMessages);
-		CountDownLatch done = new CountDownLatch(_config.getConsumers());
-		AtomicInteger received = new AtomicInteger(0);
+		CountDownLatch done = new CountDownLatch(totalMessages);
 
-		System.out.println("Starting " + _config.getConsumers() + " consumers");
 		for (int i = 0; i < _config.getConsumers(); i++) {
-			executor.submit(_consumerFactory.createConsumer(queue, totalMessages, done, received));
+			executor.submit(_consumerFactory.createConsumer(queue, done));
 		}
 
-		System.out.println("Starting " + _config.getProducers() + " producers");
 		for (int i = 0; i < _config.getProducers(); i++) {
 			executor.submit(new Producer(queue, _config.getMessagesPerProducer(), _config.getPayloadSize()));
 		}
