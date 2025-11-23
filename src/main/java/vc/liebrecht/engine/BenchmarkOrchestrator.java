@@ -1,7 +1,6 @@
 package vc.liebrecht.engine;
 
 import vc.liebrecht.config.BenchmarkConfig;
-import vc.liebrecht.domain.ExecutorType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,8 +41,8 @@ public class BenchmarkOrchestrator {
      * @throws InterruptedException If a thread is interrupted during execution
      */
     public void runBenchmarks(BenchmarkConfig config) throws InterruptedException {
-        BenchmarkStatistics statisticsPool = new BenchmarkStatistics(ExecutorType.ThreadPool);
-        BenchmarkStatistics statisticsVirtual = new BenchmarkStatistics(ExecutorType.VirtualThreads);
+        BenchmarkStatistics statisticsPool = new BenchmarkStatistics();
+        BenchmarkStatistics statisticsVirtual = new BenchmarkStatistics();
 
         System.out.println("=== Benchmark started ===");
 

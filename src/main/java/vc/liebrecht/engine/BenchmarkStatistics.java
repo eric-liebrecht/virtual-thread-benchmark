@@ -1,7 +1,5 @@
 package vc.liebrecht.engine;
 
-import vc.liebrecht.domain.ExecutorType;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,15 +13,11 @@ import java.util.List;
  */
 public class BenchmarkStatistics {
 	private final List<Long> _durationsNano;
-	private final ExecutorType _executorType;
 
 	/**
 	 * Constructs new benchmark statistics.
-	 *
-	 * @param type The executor type for which these statistics are collected
 	 */
-	public BenchmarkStatistics(final ExecutorType type) {
-		_executorType = type;
+	public BenchmarkStatistics() {
 		_durationsNano = new ArrayList<>();
 	}
 
