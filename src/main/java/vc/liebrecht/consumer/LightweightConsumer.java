@@ -35,22 +35,18 @@ public class LightweightConsumer implements Runnable {
 	 * Executes the consumer task.
 	 * <p>
 	 * This method continuously retrieves {@link Message} objects from the queue
-	 * without
-	 * performing any processing on them. The messages are simply taken from the
-	 * queue
-	 * and discarded. The loop runs until the expected total number of messages has
-	 * been
-	 * received, as tracked by the {@code CountDownLatch}.
+	 * without performing any processing on them. The messages are simply taken from
+	 * the queue and discarded. For every message retrieved, the
+	 * {@code CountDownLatch}
+	 * is decremented. The consumer continues processing messages until the
+	 * {@code CountDownLatch} reaches zero, indicating that all messages have been
+	 * processed.
 	 *
 	 * <p>
-	 * If the thread is interrupted while waiting on the queue, the interrupt flag
-	 * is
-	 * restored and the method proceeds to shutdown.
-	 *
-	 * <p>
-	 * Regardless of whether the loop completes normally or is interrupted, the
-	 * {@code CountDownLatch} is decremented in the {@code finally} block to signal
-	 * completion to the orchestrator.
+	 * The method uses a polling mechanism with a short timeout to check for new
+	 * messages. If no message is available and the latch count is zero, the loop
+	 * terminates. If the thread is interrupted while waiting on the queue, a
+	 * {@link RuntimeException} is thrown.
 	 */
 	@Override
 	public void run() {

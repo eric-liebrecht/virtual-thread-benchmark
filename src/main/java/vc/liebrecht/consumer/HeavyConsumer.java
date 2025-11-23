@@ -41,19 +41,16 @@ public class HeavyConsumer implements Runnable {
 	 * <p>
 	 * This method continuously retrieves {@link Message} objects from the queue and
 	 * simulates CPU load by hashing the message payload using SHA-256. For every
-	 * message taken from the queue, the {@code CountDownLatch} is decremented.
+	 * message processed, the {@code CountDownLatch} is decremented. The consumer
+	 * continues processing messages until the {@code CountDownLatch} reaches zero,
+	 * indicating that all messages have been processed.
 	 *
 	 * <p>
-	 * The loop runs until the expected total number of messages has been processed.
-	 * If the thread is interrupted while waiting on the queue, the interrupt flag
-	 * is
-	 * restored and the method proceeds to shutdown. Any failure to initialize the
-	 * SHA-256 digest results in a {@link RuntimeException}.
-	 *
-	 * <p>
-	 * Regardless of whether the loop completes normally or is interrupted, the
-	 * {@code CountDownLatch} is decremented in the {@code finally} block to signal
-	 * completion to the orchestrator.
+	 * The method uses a polling mechanism with a short timeout to check for new
+	 * messages. If no message is available and the latch count is zero, the loop
+	 * terminates. If the thread is interrupted while waiting on the queue, the
+	 * interrupt flag is restored and the method proceeds to shutdown. Any failure
+	 * to initialize the SHA-256 digest results in a {@link RuntimeException}.
 	 */
 	@Override
 	public void run() {

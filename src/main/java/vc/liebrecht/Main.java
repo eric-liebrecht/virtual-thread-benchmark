@@ -22,8 +22,9 @@ public class Main {
 	 * <p>
 	 * Creates a {@code BenchmarkOrchestrator} and runs benchmarks with multiple
 	 * predefined configurations. Each configuration is executed sequentially.
-	 * If an error occurs, an error message is printed and the program exits with
-	 * code 1.
+	 * After all benchmarks are completed, the results are written to a file named
+	 * {@code results.txt}. If an error occurs, an error message is printed and the
+	 * program exits with code 1.
 	 *
 	 * @param args Command-line arguments (currently unused, configurations are
 	 *             hardcoded)
