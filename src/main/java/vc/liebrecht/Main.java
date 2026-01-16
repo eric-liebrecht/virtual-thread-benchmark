@@ -33,11 +33,36 @@ public class Main {
 		try {
 			BenchmarkOrchestrator orchestrator = new BenchmarkOrchestrator();
 			List<BenchmarkConfig> configs = List.of(
-					new BenchmarkConfig(1, 1, ConsumerType.LIGHTWEIGHT, 50, 16, 1001),
-					new BenchmarkConfig(10, 1, ConsumerType.LIGHTWEIGHT, 50, 16, 501),
-					new BenchmarkConfig(1, 1, ConsumerType.LIGHTWEIGHT, 10_000, 16, 101),
-					new BenchmarkConfig(50, 1, ConsumerType.LIGHTWEIGHT, 10_000, 16, 51),
-					new BenchmarkConfig(500, 1, ConsumerType.LIGHTWEIGHT, 10_000, 16, 21));
+
+					// Lightweight Consumers – geringe Systemlast
+					new BenchmarkConfig(1, 1, ConsumerType.LIGHTWEIGHT, 50, 16, 501),      // Config L1
+					new BenchmarkConfig(10, 1, ConsumerType.LIGHTWEIGHT, 50, 16, 251),     // Config L2
+
+					// Lightweight Consumers – mittlere Systemlast
+					new BenchmarkConfig(1, 1, ConsumerType.LIGHTWEIGHT, 10_000, 16, 51),   // Config L3
+					new BenchmarkConfig(50, 1, ConsumerType.LIGHTWEIGHT, 10_000, 16, 31),  // Config L4
+					new BenchmarkConfig(500, 1, ConsumerType.LIGHTWEIGHT, 10_000, 16, 21), // Config L5
+
+					// Lightweight Consumers – hohe Systemlast
+					new BenchmarkConfig(1_000, 1, ConsumerType.LIGHTWEIGHT, 100_000, 16, 21), // Config L6
+
+					// Lightweight Consumers – hohe Parallelität
+					new BenchmarkConfig(100, 100, ConsumerType.LIGHTWEIGHT, 10_000, 16, 21),   // Config L7
+					new BenchmarkConfig(500, 500, ConsumerType.LIGHTWEIGHT, 10_000, 16, 21),   // Config L8
+					new BenchmarkConfig(1_000, 1_000, ConsumerType.LIGHTWEIGHT, 5_000, 16, 21),// Config L9
+
+					// Heavy Consumers – geringe Systemlast
+					new BenchmarkConfig(1, 1, ConsumerType.HEAVY, 500, 16_384, 101),  // Config H1
+					new BenchmarkConfig(10, 1, ConsumerType.HEAVY, 500, 16_384, 51),  // Config H2
+
+					// Heavy Consumers – mittlere Systemlast
+					new BenchmarkConfig(1, 1, ConsumerType.HEAVY, 20_000, 16_384, 21), // Config H3
+					new BenchmarkConfig(10, 1, ConsumerType.HEAVY, 20_000, 16_384, 21),// Config H4
+
+					// Heavy Consumers – hohe Systemlast
+					new BenchmarkConfig(1, 1, ConsumerType.HEAVY, 200_000, 16_384, 21), // Config H5
+					new BenchmarkConfig(20, 1, ConsumerType.HEAVY, 200_000, 16_384, 21) // Config H6
+			);
 
 			for (BenchmarkConfig config : configs) {
 				orchestrator.runBenchmarks(config);
